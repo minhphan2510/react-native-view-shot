@@ -13,7 +13,7 @@ type Options = {
   format: "png" | "jpg" | "webm" | "raw",
   quality: number,
   result: "tmpfile" | "base64" | "data-uri" | "zip-base64",
-  snapshotContentContainer: boolean
+  snapshotContentContainer: boolean,
 };
 
 if (!RNViewShot) {
@@ -34,7 +34,7 @@ const defaultOptions = {
   format: "png",
   quality: 1,
   result: "tmpfile",
-  snapshotContentContainer: false
+  snapshotContentContainer: false,
 };
 
 // validate and coerce options
@@ -43,7 +43,7 @@ function validateOptions(
 ): { options: Options, errors: Array<string> } {
   const options: Options = {
     ...defaultOptions,
-    ...input
+    ...input,
   };
   const errors = [];
   if (
@@ -131,7 +131,7 @@ export function captureRef<T: React$ElementType>(
   if (__DEV__ && errors.length > 0) {
     console.warn(
       "react-native-view-shot: bad options:\n" +
-        errors.map(e => `- ${e}`).join("\n")
+        errors.map((e) => `- ${e}`).join("\n")
     );
   }
   return RNViewShot.captureRef(view, options);
@@ -153,7 +153,7 @@ export function captureScreen(optionsObject?: Options): Promise<string> {
   if (__DEV__ && errors.length > 0) {
     console.warn(
       "react-native-view-shot: bad options:\n" +
-        errors.map(e => `- ${e}`).join("\n")
+        errors.map((e) => `- ${e}`).join("\n")
     );
   }
   return RNViewShot.captureScreen(options);
@@ -166,7 +166,7 @@ type Props = {
   onLayout?: (e: *) => void,
   onCapture?: (uri: string) => void,
   onCaptureFailure?: (e: Error) => void,
-  style?: ViewStyleProp
+  style?: ViewStyleProp,
 };
 
 function checkCompatibleProps(props: Props) {
@@ -199,7 +199,7 @@ export default class ViewShot extends Component<Props> {
   lastCapturedURI: ?string;
 
   resolveFirstLayout: (layout: Object) => void;
-  firstLayoutPromise: Promise<Object> = new Promise(resolve => {
+  firstLayoutPromise: Promise<Object> = new Promise((resolve) => {
     this.resolveFirstLayout = resolve;
   });
 
@@ -225,7 +225,7 @@ export default class ViewShot extends Component<Props> {
     if (!this.root) return;
     if (this.lastCapturedURI) {
       // schedule releasing the previous capture
-      setTimeout(releaseCapture, 500, this.lastCapturedURI);
+      // setTimeout(releaseCapture, 500, this.lastCapturedURI);
     }
     this.lastCapturedURI = uri;
     const { onCapture } = this.props;
